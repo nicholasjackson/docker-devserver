@@ -37,6 +37,4 @@ useradd -u 1000 -r -g swuser -d /home/swuser -s /sbin/nologin -c "Docker image u
 chown -R swuser:swuser /home/swuser && \
 usermod -G staff swuser
 
-USER swuser
-
 CMD ["bash"]
