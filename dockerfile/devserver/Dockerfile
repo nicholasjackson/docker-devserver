@@ -22,6 +22,7 @@ RUN echo y | sudo apt-get install ruby
 RUN echo y | sudo apt-get install ruby-dev
 RUN echo y | sudo apt-get install build-essential
 RUN gem install compass
+RUN gem install bundler
 
 RUN echo y | sudo apt-get install nodejs
 RUN echo y | sudo apt-get install npm
