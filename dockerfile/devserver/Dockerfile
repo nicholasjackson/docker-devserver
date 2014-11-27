@@ -24,7 +24,16 @@ RUN sudo echo y | apt-get install default-jre
 # install xvfb
 RUN echo y | sudo apt-get install xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic
 RUN echo y | sudo apt-get install xvfb
+
+# install firefox
 RUN echo y | sudo apt-get install firefox
+
+# install chrome
+RUN echo y | sudo apt-get install wget
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+RUN sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+RUN sudo apt-get update
+RUN echo y | sudo apt-get install google-chrome-stable
 
 # install phantomjs
 RUN echo y | sudo apt-get install phantomjs
