@@ -26,6 +26,9 @@ RUN echo y | sudo apt-get install xfonts-100dpi xfonts-75dpi xfonts-scalable xfo
 RUN echo y | sudo apt-get install xvfb
 RUN echo y | sudo apt-get install firefox
 
+# install phantomjs
+RUN echo y | sudo apt-get install phantomjs
+
 # install ruby and SASS gem required to build SASS from grunt
 RUN echo y | sudo apt-get install ruby
 RUN echo y | sudo apt-get install ruby-dev
