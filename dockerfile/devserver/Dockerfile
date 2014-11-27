@@ -43,5 +43,8 @@ RUN sudo ln -s /usr/bin/nodejs /usr/bin/node
 RUN npm install -g bower
 RUN npm install -g grunt-cli
 
+# set the environment variable for the display
+ENV DISPLAY 99
+
 # start xvb on screen 99
 CMD ["/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16"]
