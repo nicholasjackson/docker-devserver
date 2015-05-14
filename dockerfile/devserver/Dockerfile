@@ -28,6 +28,8 @@ RUN echo y | sudo apt-get install npm
 RUN sudo ln -s /usr/bin/nodejs /usr/bin/node
 RUN npm install -g bower
 RUN npm install -g grunt-cli
+RUN npm install -g yo generator-fluxible
+RUN npm install -g react-tools
 
 # create user to run bower under, bower does not like to be run as root
 # user is mapped as id 1000 as this is the id that docker uses to mount volumes
