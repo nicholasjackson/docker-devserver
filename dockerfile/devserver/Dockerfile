@@ -17,6 +17,23 @@ RUN sudo echo y | apt-get install git
 
 RUN sudo echo y | apt-get install default-jre
 
+# install xvfb
+RUN echo y | sudo apt-get install xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic
+RUN echo y | sudo apt-get install xvfb
+
+# install firefox
+RUN echo y | sudo apt-get install firefox
+
+# install chrome
+RUN echo y | sudo apt-get install wget
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+RUN sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+RUN sudo apt-get update
+RUN echo y | sudo apt-get install google-chrome-stable
+
+# install phantomjs
+RUN echo y | sudo apt-get install phantomjs
+
 # install ruby and SASS gem required to build SASS from grunt
 RUN echo y | sudo apt-get install ruby
 RUN echo y | sudo apt-get install ruby-dev
@@ -31,14 +48,8 @@ RUN npm install -g grunt-cli
 RUN npm install -g yo generator-fluxible
 RUN npm install -g react-tools
 
-# create user to run bower under, bower does not like to be run as root
-# user is mapped as id 1000 as this is the id that docker uses to mount volumes
-RUN mkdir /home/swuser && \
-groupadd -r swuser -g 433 && \
-useradd -u 1000 -r -g swuser -d /home/swuser -s /sbin/nologin -c "Docker image user" swuser && \
-chown -R swuser:swuser /home/swuser && \
-usermod -G staff swuser
+# set the environment variable for the display
+ENV DISPLAY 99
 
-USER swuser
-
-CMD ["bash"]
+# start xvb on screen 99
+CMD ["/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16"]
